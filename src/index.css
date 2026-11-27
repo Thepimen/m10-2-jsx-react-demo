@@ -207,6 +207,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  scrollbar-gutter: stable;
 }
 
 body {
@@ -283,12 +284,18 @@ body {
 .site-header-inner {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 0.85rem 1.5rem;
+  padding: 0.78rem 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.85rem;
   flex-wrap: wrap;
+}
+
+.site-header-inner--full {
+  max-width: none;
+  width: 100%;
+  padding: 0.72rem 1.35rem;
 }
 
 .brand-lockup {
@@ -297,6 +304,14 @@ body {
   gap: 0.72rem;
   text-decoration: none;
   color: var(--text-primary);
+}
+
+.brand-lockup-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
 }
 
 .brand-mark {
@@ -345,21 +360,33 @@ body {
 }
 
 .header-nav-link {
+  background: transparent;
+  border: 1.5px solid transparent;
   color: var(--text-secondary);
   text-decoration: none;
+  font-family: var(--font-sans);
   font-size: 0.88rem;
   font-weight: 600;
-  padding: 0.5rem 0.85rem;
+  padding: 0.48rem 0.88rem;
   border-radius: 10px;
   min-height: 44px;
   display: inline-flex;
   align-items: center;
-  transition: color 0.18s ease, background-color 0.18s ease;
+  gap: 0.42rem;
+  cursor: pointer;
+  transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
 }
 
 .header-nav-link:hover {
   color: var(--text-primary);
   background: var(--accent-primary-bg);
+}
+
+.header-nav-link.is-current {
+  color: var(--text-primary);
+  background: var(--accent-primary-bg);
+  border-color: var(--accent-primary-border);
+  font-weight: 700;
 }
 
 .header-actions {
@@ -423,17 +450,45 @@ body {
   box-shadow: 4.5px 4.5px 0 var(--brutal-shadow);
 }
 
+.brutal-cta-sm--outline {
+  background: var(--brutal-paper);
+  color: var(--text-primary);
+}
+
+.brutal-cta-sm--outline:hover {
+  background: var(--brutal-lime);
+  color: var(--brutal-lime-ink);
+}
+
+.page-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.landing-page-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 /* ----------------------------------------------------------------------------
    LANDING BRUTALISTA SPLIT-SCREEN (REFERENCIA FOTO STRIC + NEO-BRUTALISMO)
    ---------------------------------------------------------------------------- */
 .landing-section {
   position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
   background: var(--bg-hero-surface);
   border-bottom: 2.5px solid var(--brutal-border);
   overflow: hidden;
 }
 
 .landing-container {
+  width: 100%;
   max-width: 1320px;
   margin: 0 auto;
   padding: clamp(2.25rem, 4.5vw, 4.25rem) 1.5rem clamp(2.5rem, 5vw, 4.5rem);
@@ -917,55 +972,37 @@ body {
   position: relative;
   flex: 1;
   background: var(--bg-workspace-mesh);
-  padding: clamp(2rem, 4vw, 3.5rem) 1.5rem clamp(3rem, 5vw, 4.5rem);
-  overflow: hidden;
-}
-
-.workspace-container {
-  max-width: 1320px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 2;
-}
-
-.workspace-intro-bar {
+  padding: 1rem 1.25rem 1.35rem;
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
 }
 
-.workspace-kicker {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-primary);
-  margin-bottom: 0.35rem;
-}
-
-.workspace-heading {
-  font-family: var(--font-display);
-  font-size: clamp(1.55rem, 2.8vw, 2.3rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+.workspace-zone--fullscreen {
+  min-height: calc(100vh - 142px);
 }
 
 .v22-shell {
+  width: 100%;
+  max-width: none;
+  flex: 1;
   display: grid;
   grid-template-columns: 78px minmax(0, 1fr);
-  gap: 1.25rem;
-  padding: 1.15rem;
+  gap: 1.15rem;
+  padding: 1.05rem;
   border-radius: var(--radius-xl);
   background: var(--glass-shell-bg);
   backdrop-filter: blur(24px) saturate(165%);
   -webkit-backdrop-filter: blur(24px) saturate(165%);
   border: 1.5px solid var(--glass-shell-border);
   box-shadow: var(--glass-shell-shadow);
+  align-items: stretch;
+}
+
+.v22-shell--fullscreen {
+  min-height: 100%;
 }
 
 /* Barra lateral flotante oscura V22 */
@@ -980,6 +1017,9 @@ body {
   justify-content: space-between;
   gap: 1rem;
   box-shadow: 0 20px 40px -16px rgba(6, 17, 15, 0.5);
+  position: sticky;
+  top: 82px;
+  max-height: calc(100vh - 108px);
 }
 
 .v22-rail-brand {
@@ -995,6 +1035,7 @@ body {
   font-weight: 800;
   font-size: 0.76rem;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .v22-rail-nav {
@@ -1074,16 +1115,43 @@ body {
 /* Contenido principal dentro del Shell Glassy V22 */
 .v22-main {
   min-width: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 1rem;
+}
+
+.v22-module-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.v22-module-frame {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.v22-module-frame > .card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.v22-module-frame > .card > .file-hint {
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 /* Banner Hero Esmeralda V22 (directo del video) */
 .v22-hero-banner {
   position: relative;
-  border-radius: 22px;
-  padding: 1.4rem 1.65rem;
+  border-radius: 20px;
+  padding: 1.15rem 1.5rem;
   background: radial-gradient(circle at 88% 20%, rgba(52, 211, 153, 0.28) 0%, transparent 45%),
     radial-gradient(circle at 12% 90%, rgba(200, 255, 61, 0.14) 0%, transparent 45%),
     linear-gradient(135deg, #0b1d19 0%, #14362e 55%, #0d2320 100%);
@@ -1094,13 +1162,17 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.85rem;
   overflow: hidden;
+}
+
+.v22-hero-copy {
+  min-width: 0;
 }
 
 .v22-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.3vw, 1.95rem);
+  font-size: clamp(1.25rem, 2.1vw, 1.85rem);
   font-weight: 700;
   letter-spacing: -0.025em;
   line-height: 1.12;
@@ -1117,30 +1189,30 @@ body {
 }
 
 .v22-hero-sub {
-  margin-top: 0.35rem;
-  font-size: 0.88rem;
-  color: rgba(232, 246, 240, 0.80);
-  max-width: 62ch;
+  margin-top: 0.25rem;
+  font-size: 0.86rem;
+  color: rgba(232, 246, 240, 0.82);
 }
 
 .v22-hero-meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .v22-stat-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.42rem 0.8rem;
+  padding: 0.4rem 0.78rem;
   border-radius: var(--radius-pill);
   background: rgba(255, 255, 255, 0.10);
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: #f4fbf8;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.73rem;
   font-weight: 600;
   backdrop-filter: blur(10px);
 }
@@ -1151,20 +1223,23 @@ body {
   color: #dcff82;
 }
 
-/* Tabs horizontales accesibles (sincronizadas con el Rail V22) */
+/* Tabs horizontales en fila única uniforme (sin saltos huérfanos) */
 .tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.48rem;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 0.5rem;
+  width: 100%;
 }
 
 .tab-btn {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.48rem;
+  justify-content: center;
+  gap: 0.45rem;
   min-height: 44px;
-  padding: 0.55rem 0.95rem;
+  width: 100%;
+  padding: 0.52rem 0.75rem;
   border-radius: 13px;
   border: 1px solid var(--glass-card-border);
   background: var(--glass-card-bg);
@@ -1173,9 +1248,17 @@ body {
   color: var(--text-secondary);
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.86rem;
+  font-size: 0.84rem;
   cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   transition: border-color 0.18s ease, transform 0.16s var(--ease-out-expo);
+}
+
+.tab-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tab-btn:hover {
@@ -1223,11 +1306,19 @@ body {
 
 .card-head {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 1rem;
   margin-bottom: 1.15rem;
+}
+
+.ticket-badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.4rem;
+  flex-shrink: 0;
 }
 
 .card h2 {
@@ -1277,13 +1368,14 @@ body {
 
 .grid-2 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.15rem;
+  align-items: start;
 }
 
 .grid-3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -1671,7 +1763,11 @@ body {
   background: var(--footer-bg);
   color: var(--footer-text);
   border-top: 2.5px solid var(--brutal-border);
-  padding: 2.25rem 1.5rem;
+  padding: 2rem 1.5rem;
+}
+
+.site-footer--compact {
+  padding: 1.1rem 1.35rem;
 }
 
 .site-footer-inner {
@@ -1681,7 +1777,12 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1.25rem;
+}
+
+.site-footer-inner--full {
+  max-width: none;
+  width: 100%;
 }
 
 .footer-brand-title {
@@ -1744,6 +1845,10 @@ body {
     min-height: 430px;
     justify-content: center;
   }
+
+  .tabs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 920px) {
@@ -1758,12 +1863,22 @@ body {
   }
 
   .v22-rail {
+    position: static;
+    max-height: none;
     flex-direction: row;
     padding: 0.5rem 0.6rem;
     border-radius: 16px;
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
   }
 
   .v22-rail::-webkit-scrollbar {
@@ -1820,6 +1935,37 @@ body {
     display: none;
   }
 
+  .card-head {
+    flex-wrap: wrap;
+  }
+
+  .v22-rail {
+    padding: 0.42rem 0.32rem;
+  }
+
+  .v22-rail-nav {
+    gap: 0.08rem;
+  }
+
+  .v22-rail-btn {
+    width: auto;
+    min-width: 44px;
+    flex: 1;
+  }
+
+  .tab-btn {
+    padding: 0.45rem 0.48rem;
+    font-size: 0.75rem;
+    gap: 0.3rem;
+    justify-content: flex-start;
+  }
+
+  .tab-num {
+    font-size: 0.65rem;
+    padding: 0.12rem 0.32rem;
+    flex-shrink: 0;
+  }
+
   .landing-container {
     padding: 1.75rem 1rem 2.25rem;
   }
@@ -1846,6 +1992,10 @@ body {
 
   .brutal-cta-sm {
     display: none;
+  }
+
+  .tabs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .grid-2 {

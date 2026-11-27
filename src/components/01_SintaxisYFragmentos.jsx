@@ -83,7 +83,7 @@ export default function SintaxisYFragmentos() {
               autoComplete="name"
             />
 
-            <div id="campo-alumno-estado" aria-live="polite">
+            <div id="campo-alumno-estado" aria-live="polite" style={{ minHeight: '64px' }}>
               <AnimatePresence mode="wait">
                 {tieneError && (
                   <motion.p
