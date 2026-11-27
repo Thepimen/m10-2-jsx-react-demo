@@ -4,7 +4,7 @@
 > **Módulo:** Desarrollo de Interfaces (Código 0488) · 2º CFGS DAM · Instituto Nebrija  
 > **Stack:** React 18 · Vite 5 · Framer Motion · Lucide React · CSS Custom Properties  
 > **Repositorio GitHub:** [`https://github.com/Thepimen/m10-2-jsx-react-demo`](https://github.com/Thepimen/m10-2-jsx-react-demo)  
-> **Aplicación en Producción (Vercel):** [`https://m10-2-jsx-react-demo.vercel.app`](https://m10-2-jsx-react-demo.vercel.app)
+> **Aplicación en Producción (Vercel):** [`https://m10-2-jsx-react-demo-chi.vercel.app`](https://m10-2-jsx-react-demo-chi.vercel.app)
 
 ---
 
